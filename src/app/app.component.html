@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>User Information Form</h1>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName" class="form-control">
+      <div class="error" *ngIf="userForm.get('firstName')?.hasError('required')">
+        First Name is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName" class="form-control">
+      <div class="error" *ngIf="userForm.get('lastName')?.hasError('required')">
+        Last Name is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control">
+      <div class="error" *ngIf="userForm.get('phoneNumber')?.hasError('pattern')">
+        Phone Number must be 10 digits with different first and fourth digits not equal to 0.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email" class="form-control">
+      <div class="error" *ngIf="userForm.get('email')?.hasError('email')">
+        Invalid email format.
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+  </form>
+
+  <h2>User Data</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
